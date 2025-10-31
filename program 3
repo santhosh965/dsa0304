@@ -1,0 +1,32 @@
+import nltk
+from nltk import word_tokenize, pos_tag
+from nltk.stem import WordNetLemmatizer
+
+nltk.download('punkt', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('omw-1.4', quiet=True)  
+
+text = "The children are playing with bees and the leaves."
+tokens = word_tokenize(text)
+pos = pos_tag(tokens)
+lem = WordNetLemmatizer()
+
+def penn_to_wordnet(tag):
+    if tag.startswith('J'): 
+        return 'a'
+    if tag.startswith('V'): 
+        return 'v'
+    if tag.startswith('N'): 
+        return 'n'
+    if tag.startswith('R'): 
+        return 'r'
+    return 'n'
+
+morph = [(t, tag, lem.lemmatize(t, penn_to_wordnet(tag))) for t, tag in pos]
+print(morph)
+
+output:
+[('The', 'DT', 'The'), ('children', 'NNS', 'child'), ('are', 'VBP', 'be'), ('playing', 'VBG', 'play'), ('with', 'IN', 'with'), ('bees', 'NNS', 'bee'), ('and', 'CC', 'and'), ('the', 'DT', 'the'), ('leaves', 'NNS', 'leaf'), ('.', '.', '.')]
+
+
