@@ -1,0 +1,7 @@
+import nltk
+patterns=[(r'.ing$', 'VBG'),(r'.*ed$', 'VBD'),(r'.*es$', 'VBZ'),(r'^[A-Z].', 'NNP'),(r'.s$', 'NNS'),(r'.', 'NN')]
+tagger=nltk.RegexpTagger(patterns)
+print(tagger.tag("The cats are playing happily".split()))
+
+Output:
+[('The', 'NNP'), ('cats', 'NNS'), ('are', 'NN'), ('playing', 'VBG'), ('happily', 'NN')]
