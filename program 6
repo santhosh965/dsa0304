@@ -1,0 +1,19 @@
+import random
+def build_bigrams(tokens):
+    bigrams={}
+    for a,b in zip(tokens,tokens[1:]):
+        bigrams.setdefault(a,[]).append(b)
+    return bigrams
+text="the cat sat on the mat the cat ate the fish the cat slept"
+tokens=text.split()
+b=build_bigrams(tokens)
+def generate(start, length=15):
+    out=[start]
+    for _ in range(length-1):
+        choices=b.get(out[-1], tokens)
+        out.append(random.choice(choices))
+    return " ".join(out)
+print(generate("the"))
+
+output:
+the mat the cat sat on the cat ate the fish the mat the cat
