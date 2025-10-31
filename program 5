@@ -1,0 +1,16 @@
+import nltk
+from nltk.stem import PorterStemmer
+nltk.download('punkt',quiet=True)
+ps=PorterStemmer()
+words=["running","jumps","easily","fairly","happiness"]
+for w in words:
+    print(w, ps.stem(w))
+
+
+
+output:
+running run
+jumps jump
+easily easili
+fairly fairli
+happiness happi
