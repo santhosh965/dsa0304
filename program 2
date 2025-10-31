@@ -1,0 +1,21 @@
+class FSA:
+    def _init_(self):
+        self.start=0
+        self.accept={2}
+        self.trans={(0,'a'):1,(1,'b'):2,(0,'b'):0,(1,'a'):1,(2,'a'):1,(2,'b'):0}
+    def accepts(self,s):
+        state=self.start
+        for ch in s:
+            state=self.trans.get((state,ch),0)
+        return state in self.accept
+f=FSA()
+tests=["ab","aab","babab","abc","cab"]
+for t in tests:
+    print(t,f.accepts(t))
+
+output:
+ab True
+aab True
+babab True
+abc False
+cab True
