@@ -1,0 +1,10 @@
+import nltk
+from nltk import word_tokenize,pos_tag
+nltk.download('punkt',quiet=True)
+nltk.download('averaged_perceptron_tagger',quiet=True)
+text="The quick brown fox jumps over the lazy dog."
+tokens=word_tokenize(text)
+print(pos_tag(tokens))
+
+Output:
+[('The', 'DT'), ('quick', 'JJ'), ('brown', 'NN'), ('fox', 'NN'), ('jumps', 'VBZ'), ('over', 'IN'), ('the', 'DT'), ('lazy', 'JJ'), ('dog', 'NN'), ('.', '.')]7
