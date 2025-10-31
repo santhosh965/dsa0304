@@ -1,0 +1,13 @@
+import re
+text="On March 15 we met. The 22nd of November is a holiday. Christmas is Dec 25."
+patterns=[r"\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}\b",r"\b\d{1,2}(?:st|nd|rd|th)?\s+of\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\b",r"\bChristmas\b"]
+for p in patterns:
+    print(p, re.findall(p, text))
+m=re.search(r"March\s+15", text)
+print("search:", bool(m))
+
+output:
+\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}\b ['March 15']
+\b\d{1,2}(?:st|nd|rd|th)?\s+of\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\b ['22nd of November']
+\bChristmas\b ['Christmas']
+search: True
