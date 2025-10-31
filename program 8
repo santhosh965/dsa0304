@@ -1,0 +1,23 @@
+import random
+def train_most_likely(train_sentences):
+    counts={}
+    tagcounts={}
+    for sent in train_sentences:
+        for word,tag in sent:
+            counts.setdefault(word,{}).setdefault(tag,0)
+            counts[word][tag]+=1
+            tagcounts.setdefault(tag,0)
+            tagcounts[tag]+=1
+    model={}
+    for w,tmap in counts.items():
+        model[w]=max(tmap.items(), key=lambda x:x[1])[0]
+    return model, tagcounts
+def tag_sentence(model, tagcounts, sent):
+    default=max(tagcounts.items(), key=lambda x:x[1])[0]
+    return [(w, model.get(w, default)) for w in sent.split()]
+train=[[("The","DT"),("cat","NN"),("sleeps","VBZ")],[("A","DT"),("dog","NN"),("barks","VBZ")]]
+model,tagcounts=train_most_likely(train)
+print(tag_sentence(model,tagcounts,"The dog sleeps"))
+
+Output:
+[('The', 'DT'), ('dog', 'NN'), ('sleeps', 'VBZ')]
